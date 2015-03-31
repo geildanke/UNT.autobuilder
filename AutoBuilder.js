@@ -32,6 +32,8 @@ THE SOFTWARE.
 
 #pragma strict
 
+import System.IO;
+
 public static class AutoBuilder {
 	
 	function GetProjectName () {
@@ -89,7 +91,9 @@ public static class AutoBuilder {
 	@MenuItem('File/AutoBuilder/Android')
 	function PerformAndroidBuild ()
 	{
-		BuildPipeline.BuildPlayer(GetScenePaths(), 'Builds/Android',BuildTarget.Android,BuildOptions.None);
+		var path : String = 'Builds/Android';
+		Directory.CreateDirectory(path);
+		BuildPipeline.BuildPlayer(GetScenePaths(), path + '/' + GetProjectName() + '.apk', BuildTarget.Android,BuildOptions.None);
 	}
 	
 	@MenuItem('File/AutoBuilder/Web/WebGL')
