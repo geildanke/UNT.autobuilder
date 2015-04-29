@@ -35,14 +35,28 @@ THE SOFTWARE.
 import System.IO;
 
 public static class AutoBuilder {
+
+	var projectName : String = '';
 	
 	/**
 	 * Gets the Project name by looking up the directory name of the project
 	 * @return {String} Root directory name of the project
 	 */
 	function GetProjectName () {
-		var s : String[] = Application.dataPath.Split('/'[0]);
-		return s[s.Length - 2];
+		var string : String = projectName;
+		if (string == '') {
+			var s : String[] = Application.dataPath.Split('/'[0]);
+			string = s[s.Length - 2];
+		}
+		return string;
+	}
+
+	/**
+	 * Set the project name
+	 * @param {String} string Project name or project key, will be used in the file name of the player
+	 */
+	function SetProjectName (string : String) {
+		projectName = string;
 	}
 	
 	/**
@@ -110,13 +124,13 @@ public static class AutoBuilder {
 	@MenuItem('File/AutoBuilder/Mac OSX/Intel')
 	function PerformOSXIntelBuild ()
 	{
-		ExecuteBuild(GetScenePaths(), 'Builds/OSX-Intel/' + GetProjectName() + '.app',BuildTarget.StandaloneOSXIntel,BuildOptions.None);
+		ExecuteBuild(GetScenePaths(), 'Builds/OSX-Intel/' + GetProjectName() + '.app', BuildTarget.StandaloneOSXIntel, BuildOptions.None);
 	}
 	
 	@MenuItem('File/AutoBuilder/Mac OSX/Intel 64')
 	function PerformOSXIntel64Build ()
 	{
-		ExecuteBuild(GetScenePaths(), 'Builds/OSX-Intel64/' + GetProjectName() + '.app',BuildTarget.StandaloneOSXIntel64,BuildOptions.None);
+		ExecuteBuild(GetScenePaths(), 'Builds/OSX-Intel64/' + GetProjectName() + '.app', BuildTarget.StandaloneOSXIntel64, BuildOptions.None);
 	}
 	
 	@MenuItem('File/AutoBuilder/iOS')
@@ -128,7 +142,7 @@ public static class AutoBuilder {
 	@MenuItem('File/AutoBuilder/Android')
 	function PerformAndroidBuild ()
 	{
-		ExecuteBuild(GetScenePaths(), 'Builds/Android',BuildTarget.Android,BuildOptions.None);
+		ExecuteBuild(GetScenePaths(), 'Builds/Android' + GetProjectName() + '.apk', BuildTarget.Android, BuildOptions.None);
 	}
 	
 	@MenuItem('File/AutoBuilder/Web/WebGL')
