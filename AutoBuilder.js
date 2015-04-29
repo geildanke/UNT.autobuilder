@@ -142,7 +142,7 @@ public static class AutoBuilder {
 	@MenuItem('File/AutoBuilder/Android')
 	function PerformAndroidBuild ()
 	{
-		ExecuteBuild(GetScenePaths(), 'Builds/Android' + GetProjectName() + '.apk', BuildTarget.Android, BuildOptions.None);
+		ExecuteBuild(GetScenePaths(), 'Builds/Android/' + GetProjectName() + '.apk', BuildTarget.Android, BuildOptions.None);
 	}
 	
 	@MenuItem('File/AutoBuilder/Web/WebGL')
